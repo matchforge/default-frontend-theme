@@ -1,0 +1,25 @@
+{% if Page.title|length %} <title>{{ Page.title }}</title> {% endif %}
+{% if Page.description|length %} <meta name="description" content="{{ Page.description }}"/> {% endif %}
+{% if Page.keywords|length %} <meta name="keywords" content="{{ Page.keywords }}"/> {% endif %}
+{% if Page.color|length %} <meta name="theme-color" content="{{ Page.color }}"/> {% endif %}
+{% if Page.color|length %} <meta name="msapplication-TileColor" content="{{ Page.color }}"/> {% endif %}
+{% if Page.author|length %} <meta name="author" content="{{ Page.author }}"/> {% endif %}
+{% if Page.author|length %} <meta name="publisher" content="{{ Page.author }}"/> {% endif %}
+{% if Page.keywords|length %} <meta name="keywords" content="{{ Page.keywords }}"/> {% endif %}
+{% if Page.robots|length %} <meta name="robots" content="{{ Page.robots }}"/> {% else %} <meta name="robots" content="index, follow"/> {% endif %}
+{% if Page.title|length %} <meta property="og:title" content="{{ Page.title }}"/> {% endif %}
+{% if Page.title|length %} <meta property="og:site_name" content="{{ Page.title }}"/> {% endif %}
+{% if Page.image|length %} <meta property="og:image" content="{{ Page.image }}"/> {% endif %}
+{% if Page.type|length %} <meta property="og:type" content="{{ Page.type }}"/> {% endif %}
+{% if Page.url|length %} <meta property="og:url" content="{{ Page.url }}"/> {% endif %}
+{% if Page.description|length %} <meta property="og:description" content="{{ Page.description }}"/> {% endif %}
+{% if Page.title|length %} <meta name="twitter:title" content="{{ Page.title }}"/> {% endif %}
+{% if Page.description|length %} <meta name="twitter:description" content="{{ Page.description }}"/> {% endif %}
+{% if Page.image|length %} <meta name="twitter:image" content="{{ Page.image }}"/> {% endif %}
+{% if Page.twitterSite|length %} <meta name="twitter:site" content="{{ Page.twitterSite }}"/> {% endif %}
+{% if Page.twitterCreator|length %} <meta name="twitter:creator" content="{{ Page.twitterCreator }}"/> {% endif %}
+{% if Page.fbPage|length %} <meta property="fb:pages" content="{{ Page.fbPage }}"/> {% endif %}
+{% if Page.fbPage|length %} <meta http-equiv="language" content="{{ Page.language }}"/> {% endif %}
+{% if AssetManager.header|length %} {{ AssetManager.header | raw }} {% endif %}
+{{ reCAPTCHAJS }}
+{{ reCAPTCHAScript() }}

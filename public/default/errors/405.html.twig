@@ -1,0 +1,25 @@
+{% extends "/default/base.html.twig" %}
+
+{% block content %}
+    {{ translateDictionary("error") }}
+
+    <div class="content-wrap">
+    <div class="mpl-navbar-mobile-overlay"></div>
+    <div>
+    <section class="mpl-banner mpl-banner-top mpl-banner-parallax">
+        <div class="mpl-image" data-speed="0.8">
+            <img src="assets/images/dark/bg-banner-1.jpg" alt="" class="jarallax-img">
+        </div>
+        <div class="mpl-banner-content mpl-box-lg">
+            <div class="container text-center">
+                <div class="row justify-content-center" data-sr="404" data-sr-interval="200" data-sr-duration="1200" data-sr-distance="20">
+                    <div class="col-12 col-lg-8">
+                        <h1 class="display-1 mb-60" data-sr-item="404">{{ translate("404_title") }}</h1>
+                        <p class="lead text-white mb-60" data-sr-item="404">{{ translate("404_description") }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

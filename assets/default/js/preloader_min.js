@@ -1,0 +1,16 @@
+/*!-----------------------------------------------------------------
+    Name: MonsterPlay - eSports and Gaming HTML Template
+    Version: 1.0.3
+    Author: nK
+    Website: https://nkdev.info/
+    Purchase: https://themeforest.net/user/_nk/portfolio
+    Support: https://nk.ticksy.com/
+    License: You must have a valid license purchased only from ThemeForest (the above link) in order to legally use the theme for your project.
+    Copyright 2020.
+-------------------------------------------------------------------*/
+(function(modules){var installedModules={};function __webpack_require__(moduleId){if(installedModules[moduleId]){return installedModules[moduleId].exports}
+var module=installedModules[moduleId]={i:moduleId,l:!1,exports:{}};modules[moduleId].call(module.exports,module,module.exports,__webpack_require__);module.l=!0;return module.exports}
+__webpack_require__.m=modules;__webpack_require__.c=installedModules;__webpack_require__.d=function(exports,name,getter){if(!__webpack_require__.o(exports,name)){Object.defineProperty(exports,name,{enumerable:!0,get:getter})}};__webpack_require__.r=function(exports){if(typeof Symbol!=='undefined'&&Symbol.toStringTag){Object.defineProperty(exports,Symbol.toStringTag,{value:'Module'})}
+Object.defineProperty(exports,'__esModule',{value:!0})};__webpack_require__.t=function(value,mode){if(mode&1)value=__webpack_require__(value);if(mode&8)return value;if((mode&4)&&typeof value==='object'&&value&&value.__esModule)return value;var ns=Object.create(null);__webpack_require__.r(ns);Object.defineProperty(ns,'default',{enumerable:!0,value:value});if(mode&2&&typeof value!='string')for(var key in value)__webpack_require__.d(ns,key,function(key){return value[key]}.bind(null,key));return ns};__webpack_require__.n=function(module){var getter=module&&module.__esModule?function getDefault(){return module['default']}:function getModuleExports(){return module};__webpack_require__.d(getter,'a',getter);return getter};__webpack_require__.o=function(object,property){return Object.prototype.hasOwnProperty.call(object,property)};__webpack_require__.p="";return __webpack_require__(__webpack_require__.s=28)})({28:(function(module,exports,__webpack_require__){module.exports=__webpack_require__(29)}),29:(function(module,exports){var $=window.jQuery;var $doc=$(document);var perfData=window.performance.timing;var EstimatedTime=-(perfData.loadEventEnd-perfData.navigationStart);var time=Math.max(500,Math.min(1000,parseInt(EstimatedTime/1000%60,10)*100));$doc.on('DOMContentLoaded',function(){var $preloader=$('.mpl-preloader');var $preloaderProgress=$preloader.find('.mpl-preloader-progress');if(!$preloader.length||!$preloaderProgress.length){$doc.trigger('mpl.preloader.hide');return}
+$preloaderProgress.children('div').css({'transition-duration':"".concat(time,"ms"),width:'100%'});var preloaderTimer;function closePreloader(){clearTimeout(preloaderTimer);$preloader.addClass('mpl-preloader-hide');$doc.trigger('mpl.preloader.hide')}
+if($preloader.length){preloaderTimer=setTimeout(closePreloader,time)}})})})
