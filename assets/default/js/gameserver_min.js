@@ -1,0 +1,2 @@
+if($("#panel").length>0){const gameType=$("#panel").data("game-type");const selection=$("#panel").data("selection");const selectionType=$("#panel").data("selection-type");function updatePrice(){if(selectionType==="dropdown"){var selection=$('#'+selection).val();console.log("SELECTED: "+selection)}else{alert("Other render type not included to get selection value yet")}
+let result=callAPI("GET","/ajax/gameserver/pricing?game="+gameType+"&selection="+selection,{});if(result!==!1){$("#price").text(result.price+"€")}}}

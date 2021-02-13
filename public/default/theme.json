@@ -38,7 +38,9 @@
       "/assets/default/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js": false,
       "/assets/default/vendor/bootstrap-validator/dist/validator.min.js": false,
       "/assets/default/js/monsterplay.min.js": false,
-      "/assets/default/js/monsterplay-init.js": "false"
+      "/assets/default/js/monsterplay-init.js": false,
+      "/assets/default/js/gameserver.js": true,
+      "/assets/default/js/ajax.js": true
     },
     "jQuery": { "src": "https://code.jquery.com/jquery-3.5.1.min.js", "minify": "false" }
   }

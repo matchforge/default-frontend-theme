@@ -4,7 +4,7 @@
     {{ translateDictionary("gameserver") }}
 
 
-    <div class="content-wrap">
+    <div class="content-wrap" id="panel" data-game-type="{{ blueprintIdentifier }}" data-selection="{{ blueprint.pricing.varMap }}" data-selection-type="{{ blueprint.pricing.type }}">
         <div class="mpl-navbar-mobile-overlay"></div>
         <div class="no-banner">
             <div class="mpl-box-md" style="background: linear-gradient(to bottom, rgba(39, 36, 52, 0.9) 20%, rgb(39, 36, 52)), url({{ images[random(images | keys)].url }});
@@ -146,60 +146,76 @@ Additional attributes:
                             </div>
                             <p data-sr-item="product-main"><br> {{ blueprint.description }} </p>
 
+                            <div id="priceArea" style="position: relative;">
+                                <div style="display: none;" class="priceLoader">
+                                    <div class="spinner-border priceLoader-circle" role="status" style="">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                {% set leftFieldSize = 4 %}
+                                {% set rightFieldSize = 8 %}
 
-                            {% set leftFieldSize = 4 %}
-                            {% set rightFieldSize = 8 %}
-
-                            {% for variable,content in blueprint.variables %}
-                                {% if content.showOnCreation == true %}
-                                    {% if variable == blueprint.pricing.varMap %}
-                                        {% if blueprint.pricing.type == "dropdown" %}
-                                            <div class="row hgap-sm vgap-sm align-items-center mt-30">
-                                                <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
-                                                <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                    <select name="{{ variable }}" id="{{ variable }}" class="form-control form-control-sm custom-select">
-                                                        <!--<option selected>Choose an option</option>-->
-                                                        {% for curStep in range(0, content.rules.max, blueprint.pricing.step) %}
-                                                            {% if curStep != 0 %}
-                                                                <option value="{{ curStep }}">{{ curStep }} {{ content.name }}</option>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </select>
-                                                    <span class="form-control-bg"></span>
+                                {% for variable,content in blueprint.variables %}
+                                    {% if content.showOnCreation == true %}
+                                        {% if variable == blueprint.pricing.varMap %}
+                                            {% if blueprint.pricing.type == "dropdown" %}
+                                                <div class="row hgap-sm vgap-sm align-items-center mt-30">
+                                                    <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
+                                                    <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
+                                                        <select name="{{ variable }}" id="{{ variable }}" class="form-control form-control-sm custom-select">
+                                                            <!--<option selected>Choose an option</option>-->
+                                                            {% for curStep in range(0, content.rules.max, blueprint.pricing.step) %}
+                                                                {% if curStep != 0 %}
+                                                                    <option value="{{ curStep }}">{{ curStep }} {{ content.name }}</option>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </select>
+                                                        <span class="form-control-bg"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        {% elseif blueprint.pricing.type == "range" %}
-                                            range-thisfielddecidespricing
-                                        {% endif %}
-                                    {% else %}
-                                        {% if content.rules.type == "integer" %}
-                                            <div class="row hgap-sm vgap-sm align-items-center mt-30">
-                                                <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
-                                                <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                    <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" min="{{ content.rules.min }}" max="{{ content.rules.max }}" required="">
-                                                    <span class="form-control-bg"></span>
+                                            {% elseif blueprint.pricing.type == "range" %}
+                                                range-thisfielddecidespricing
+                                            {% endif %}
+                                        {% else %}
+                                            {% if content.rules.type == "integer" %}
+                                                <div class="row hgap-sm vgap-sm align-items-center mt-30">
+                                                    <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
+                                                    <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
+                                                        <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" min="{{ content.rules.min }}" max="{{ content.rules.max }}" required="">
+                                                        <span class="form-control-bg"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        {% elseif content.rules.type == "string" %}
-                                            <div class="row hgap-sm vgap-sm align-items-center mt-30">
-                                                <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
-                                                <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                    <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" required="">
-                                                    <span class="form-control-bg"></span>
+                                            {% elseif content.rules.type == "string" %}
+                                                <div class="row hgap-sm vgap-sm align-items-center mt-30">
+                                                    <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
+                                                    <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
+                                                        <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" required="">
+                                                        <span class="form-control-bg"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                                {% endfor %}
 
-
-                            <div class="row hgap-sm vgap-sm align-items-center mt-40">
-                                <div class="col-auto" data-sr-item="product-main">
-                                    <h3 class="mt-30" id="price" data-sr-item="product-main">{{ pricingStartingAt|number_format(2) }}€</h3>
+                                <div class="row hgap-sm vgap-sm align-items-center mt-30">
+                                    <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">Server Location</div>
+                                    <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
+                                        <select name="location" id="location" class="form-control form-control-sm custom-select">
+                                            <option value="">Please choose a location...</option>
+                                            <option value="Germany, Frankfurt">Germany, Frankfurt</option>
+                                        </select>
+                                        <span class="form-control-bg"></span>
+                                    </div>
                                 </div>
-                                <div class="col-auto" data-sr-item="product-main">
-                                    <div class="btn btn-md btn-brand">Add to cart</div>
+
+                                <div class="row hgap-sm vgap-sm align-items-center mt-40" style="justify-content: center;">
+                                    <div class="col-auto" data-sr-item="product-main">
+                                        <h3 class="mt-30" id="price" data-sr-item="product-main">{{ pricingStartingAt|number_format(2) }}€</h3>
+                                    </div>
+                                    <div class="col-auto" data-sr-item="product-main">
+                                        <div class="btn btn-md btn-brand">Add to cart</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -488,313 +504,53 @@ Additional attributes:
             <!-- Related -->
             <div class="mpl-box-sm bg-light">
                 <div class="container">
-                    <h2>Related Products</h2>
-                    <!--
-Carousel
+                    <h2>Frequently Asked Questions (FAQ)</h2>
+                    <div class="row vgap" data-sr="footer" data-sr-interval="120" data-sr-duration="1200" data-sr-distance="20">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Collapsible Group Item #1
+                                    </button>
+                                </h5>
+                            </div>
 
-Additional attributes:
-    data-autoplay
-    data-loop
-    data-dots
-    data-arrows
-    data-speed
-    data-slides
-    data-autoHeight
-    data-grabCursor
-    data-scrollbar
--->
-                    <div class="mpl-carousel" data-gap="10" data-loop="true" data-arrows="true" data-slides="1"
-                         data-breakpoints="992:3,767:2">
-                        <a href="shop-product.html" class="mpl-product-item mpl-product-overlay">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="assets/default/images/dark/product-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h5">Gamepad MPL</span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item mpl-product-overlay">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="assets/default/images/dark/product-3-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h5">Headphones MPS</span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 80%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item mpl-product-overlay">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="assets/default/images/dark/product-5-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h5">Microphone MPL</span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item mpl-product-overlay">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="assets/default/images/dark/product-6-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h5">Camera MPL</span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item mpl-product-overlay">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="assets/default/images/dark/product-4-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h5">Soundbar MPL</span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Collapsible Group Item #2
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Collapsible Group Item #3
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
