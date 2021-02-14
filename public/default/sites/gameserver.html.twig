@@ -202,8 +202,7 @@ Additional attributes:
                                     <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">Server Location</div>
                                     <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
                                         <select name="location" id="location" class="form-control form-control-sm custom-select">
-                                            <option value="">Please choose a location...</option>
-                                            <option value="Germany, Frankfurt">Germany, Frankfurt</option>
+                                            <option value="" disabled selected>Please choose a location...</option>
                                         </select>
                                         <span class="form-control-bg"></span>
                                     </div>
@@ -214,7 +213,7 @@ Additional attributes:
                                         <h3 class="mt-30" id="price" data-sr-item="product-main">{{ pricingStartingAt|number_format(2) }}€</h3>
                                     </div>
                                     <div class="col-auto" data-sr-item="product-main">
-                                        <div class="btn btn-md btn-brand">Add to cart</div>
+                                        <button id="cartButton" class="btn btn-md btn-brand">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
