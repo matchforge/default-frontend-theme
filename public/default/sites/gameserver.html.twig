@@ -64,31 +64,38 @@ Additional attributes:
                                 </div>
                             </div>
 
-                            <h3 style="margin-bottom: 0.3em; margin-top: 1em; padding-left: 10px;">What you get</h3>
-                            <table class="table mpl-table-product-information mb-0">
-                                <tbody>
-                                <tr>
-                                    <th>CPU</th>
-                                    <td style="background-color: #282535;">2x 4.6 GhZ (AMD Ryzen 3900X)</td>
-                                </tr>
-                                <tr>
-                                    <th>RAM</th>
-                                    <td style="background-color: #282535;">2048 MB DDR4</td>
-                                </tr>
-                                <tr>
-                                    <th>Disk</th>
-                                    <td style="background-color: #282535;">20 GB NVMe SSD</td>
-                                </tr>
-                                <tr>
-                                    <th>Network</th>
-                                    <td style="background-color: #282535;">1 Gbit/s Uplink</td>
-                                </tr>
-                                <tr>
-                                    <th>DDoS Protection</th>
-                                    <td style="background-color: #282535;">Yes, up to 250 Gbps</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="row vgap" data-sr="product-details" data-sr-interval="240" data-sr-duration="2000" data-sr-distance="20">
+                                <div style="display: none;" class="priceLoader">
+                                    <div class="spinner-border priceLoader-circle" role="status" style="">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                <h3 style="margin-bottom: 0.3em; margin-top: 1em; padding-left: 10px;">What you get</h3>
+                                <table class="table mpl-table-product-information mb-0">
+                                    <tbody>
+                                    <tr>
+                                        <th>CPU</th>
+                                        <td id="cpuDetails" style="background-color: #282535;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>RAM</th>
+                                        <td id="ramDetails" style="background-color: #282535;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Disk</th>
+                                        <td id="discDetails" style="background-color: #282535;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Network</th>
+                                        <td id="networkDetails" style="background-color: #282535;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>DDoS Protection</th>
+                                        <td id="ddosProtection" style="background-color: #282535;">-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="col-lg-5" data-sr="product-main" data-sr-interval="120" data-sr-duration="1000"
                              data-sr-distance="20">
