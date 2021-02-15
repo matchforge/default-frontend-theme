@@ -1,3 +1,2 @@
-function callAPI(type,route,data){request=$.ajax({type:type,url:route,data:data,success:function(data){console.log(data)}});request.done(function(response,status,xhr){response=JSON.parse(response);return handleAPIResponse(response)});request.fail(function(xhr,statusCode,error){console.log("Error! Text: "+error);console.log(xhr.status);alert("Error!");return!1})}
-function handleAPIResponse(response,callback){if(response.hasOwnProperty("errorMessage")){displayError(response.errorMessage);return!1}else{return response}}
+function callAPI(type,route,data){return $.ajax({type:type,url:route,dataType:"json",async:!1,data:data,success:function(response){if(response.hasOwnProperty("errorMessage")){displayError(response.errorMessage);return{}}else{return response}}})}
 function displayError(errorMessage){console.log('Error: '+errorMessage);alert('Error: '+errorMessage)}

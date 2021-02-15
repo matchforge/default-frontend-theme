@@ -32,10 +32,10 @@ if($("#panel").length > 0) {
         requiredRAM = result.responseJSON.requirements.ram;
         requiredDisc = result.responseJSON.requirements.disc;
         getLocations();
-        $(".priceLoader").css("display","none");
         if($("#location").val() != "") {
             updateHardware();
         }
+        $(".priceLoader").css("display","none");
         refreshTimer = 10;
     }
 

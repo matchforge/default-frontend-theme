@@ -72,9 +72,9 @@
                         <div class="mpl-dropdown-menu">
                             <ul class="mpl-navbar-nav">
                                 <li>
-                                    <a href="sign-in.html" class="mpl-nav-link">
+                                    <div onclick="logout();" style="cursor: pointer !important;" class="mpl-nav-link">
                                         <span class="mpl-nav-link-name"> Log Out </span>
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -92,37 +92,33 @@
                             </svg>
                         </a>
                         <div class="mpl-dropdown-menu">
-                            <form class="mpl-navbar-login-form" action="#" method="post">
+                            <div class="mpl-navbar-login-form">
                                 <div class="row hgap-sm vgap-sm align-items-center">
                                     <div class="col-12">
-                                        <label for="nav_username">Username:</label><input
-                                                class="form-control form-control-sm" type="text" id="nav_username"
-                                                name="username" placeholder="Username"><span
+                                        <label for="email">E-Mail:</label><input
+                                                class="form-control form-control-sm" type="text" id="email"
+                                                name="username" placeholder="E-Mail Address"><span
                                                 class="form-control-bg"></span>
                                     </div>
                                     <div class="col-12">
-                                        <label for="nav_password">Password:</label><input
-                                                class="form-control form-control-sm" type="text" id="nav_password"
+                                        <label for="password">Password:</label><input
+                                                class="form-control form-control-sm" type="password" id="password"
                                                 name="password" placeholder="Password"><span
                                                 class="form-control-bg"></span>
                                     </div>
                                     <div class="col">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="nav_rememberme"
-                                                   name="rememberme"><label class="custom-control-label"
-                                                                            for="nav_rememberme">Remember Me</label>
-                                        </div>
+
                                     </div>
                                     <div class="col-auto">
-                                        <a href="#" class="small">Lost Password</a>
+                                        <a href="/password-forget" class="small">Forget Password?</a>
                                     </div>
                                     <div class="col-12">
-                                        <a href="sign-in.html" class="btn btn-block btn-default">Log in</a>
+                                        <button onclick="login();" class="btn btn-block btn-default">Log in</button>
                                     </div>
-                                    <div class="col-12 small"> Are you new? <a href="sign-up.html">Sign Up</a>
+                                    <div class="col-12 small"> Are you new? <a href="/sign-up">Sign Up</a>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
