@@ -1,0 +1,49 @@
+{
+  "name": "Default Frontend Theme based on 'MonsterPlay' from nK",
+  "author": "idiox - next gen solutions",
+  "Copyright": "Copyright (c) by Dominic Poppe & idiox",
+
+  "assets": {
+    "css": {
+      "https://use.typekit.net/vgd1cli.css": false,
+      "/assets/vendor/swiper/swiper-bundle.min.css": false,
+      "/assets/vendor/fancybox/dist/jquery.fancybox.min.css": false,
+      "/assets/vendor/slider-revolution/css/settings.css": true,
+      "/assets/vendor/slider-revolution/css/layers.css": true,
+      "/assets/vendor/slider-revolution/css/navigation.css": true,
+      "/assets/vendor/bootstrap/dist/css/bootstrap.min.css": false,
+      "/assets/css/monsterplay.css": true,
+      "/assets/css/custom.css": true
+    },
+    "topJS": {
+      "/assets/js/preloader.js": "true"
+    },
+    "footerJS": {
+      "/assets/vendor/object-fit-images/dist/ofi.min.js": false,
+      "/assets/vendor/popperjs/dist/umd/popper.min.js": false,
+      "/assets/vendor/scrollreveal/dist/scrollreveal.min.js": false,
+      "/assets/vendor/animejs/lib/anime.min.js": false,
+      "/assets/vendor/bootstrap/dist/js/bootstrap.min.js": false,
+      "/assets/vendor/jarallax/dist/jarallax.min.js": false,
+      "/assets/vendor/swiper/swiper-bundle.min.js": false,
+      "/assets/vendor/fancybox/dist/jquery.fancybox.min.js": false,
+      "/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js": false,
+      "/assets/vendor/moment/min/moment.min.js": false,
+      "/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js": false,
+      "/assets/vendor/slider-revolution/js/jquery.themepunch.tools.min.js": false,
+      "/assets/vendor/slider-revolution/js/jquery.themepunch.revolution.min.js": false,
+      "/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js": false,
+      "/assets/vendor/isotope-layout/dist/isotope.pkgd.min.js": false,
+      "/assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js": false,
+      "/assets/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js": false,
+      "/assets/vendor/bootstrap-validator/dist/validator.min.js": false,
+      "/assets/js/monsterplay.min.js": false,
+      "/assets/js/monsterplay-init.js": false,
+      "/assets/js/gameserver.js": true,
+      "/assets/js/cart.js": true,
+      "/assets/js/login.js": true,
+      "/assets/js/ajax.js": true
+    },
+    "jQuery": { "src": "https://code.jquery.com/jquery-3.5.1.min.js" }
+  }
+}

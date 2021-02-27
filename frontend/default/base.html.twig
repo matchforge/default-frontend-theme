@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{% if Page.language|length %}{{Page.language}}{% endif %}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="assets/frontend/default/images/favicon.png">
+    {% include "/frontend/default/head.html.twig" %}
+</head>
+{{ translateDictionary("base") }}
+<body>
+{% include "/frontend/default/elements/preloader.html.twig" %}
+{% include "/frontend/default/elements/navbar.html.twig" %}
+{% include "/frontend/default/elements/navbar-mobile.html.twig" %}
+
+{% block content %} {% endblock %}
+
+{% if AssetManager.footer|length %} {{ AssetManager.footer | raw }} {% endif %}
+</body>
+
+{% include "/frontend/default/footer.html.twig" %}
+{% include "/frontend/default/elements/footerAdditional.html.twig" %}
+
+</html>

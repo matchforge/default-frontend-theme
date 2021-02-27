@@ -1,4 +1,23 @@
-if($("#panel").length > 0) {
+if($("#gameservers-panel").length > 0) {
+    function search() {
+        var searchQuery = $("#searchBox").val();
+        if(searchQuery === "") {
+            $("#game").each(function(e,a) {
+                $(this).fadeIn();
+            });
+        } else {
+            $("#game").each(function(e,a) {
+                if($(this).data("game-name").toLowerCase().includes(searchQuery.toLowerCase())) {
+                    $(this).fadeIn();
+                } else {
+                    $(this).fadeOut();
+                }
+            });
+        }
+    }
+}
+
+if($("#gameserver-panel").length > 0) {
     $(document).ready(function() {
         getLocations();
         updatePriceTimer();
@@ -10,9 +29,9 @@ if($("#panel").length > 0) {
         });
     });
 
-    const gameType = $("#panel").data("game-type");
-    const selection = $("#panel").data("selection");
-    const selectionType = $("#panel").data("selection-type");
+    const gameType = $("#gameserver-panel").data("game-type");
+    const selection = $("#gameserver-panel").data("selection");
+    const selectionType = $("#gameserver-panel").data("selection-type");
 
     let requiredCPU = 0;
     let requiredRAM = 0;
@@ -72,8 +91,8 @@ if($("#panel").length > 0) {
             $('#cpuDetails').html(requiredCPU + "x " + result.responseJSON.hardware.cpuSpeed + " GhZ (" + result.responseJSON.hardware.cpuModel + ")");
             $('#ramDetails').html(requiredRAM + " MB " + result.responseJSON.hardware.ramType);
             $('#discDetails').html((requiredDisc/1024) + " GB " + result.responseJSON.hardware.discType);
-            $('#networkDetails').html(result.responseJSON.hardware.network);
-            $('#ddosProtection').html(result.responseJSON.hardware.ddos);
+            $('#networkDetails').html(result.responseJSON.network);
+            $('#ddosProtection').html(result.responseJSON.ddos);
         }
     }
 

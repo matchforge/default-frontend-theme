@@ -1,10 +1,10 @@
-{% extends "/default/base.html.twig" %}
+{% extends "/frontend/default/base.html.twig" %}
 
 {% block content %}
     {{ translateDictionary("gameserver") }}
 
 
-    <div class="content-wrap" id="panel" data-game-type="{{ blueprintIdentifier }}" data-selection="{{ blueprint.pricing.varMap }}" data-selection-type="{{ blueprint.pricing.type }}">
+    <div class="content-wrap" id="gameserver-panel" data-game-type="{{ blueprintIdentifier }}" data-selection="{{ blueprint.pricing.varMap }}" data-selection-type="{{ blueprint.pricing.type }}">
         <div class="mpl-navbar-mobile-overlay"></div>
         <div class="no-banner">
             <div class="mpl-box-md" style="background: linear-gradient(to bottom, rgba(39, 36, 52, 0.9) 20%, rgb(39, 36, 52)), url({{ images[random(images | keys)].url }});
@@ -64,7 +64,7 @@ Additional attributes:
                                 </div>
                             </div>
 
-                            <div class="row vgap" data-sr="product-details" data-sr-interval="240" data-sr-duration="2000" data-sr-distance="20">
+                            <div class="row vgap" style="position: relative;" data-sr="product-details" data-sr-interval="240" data-sr-duration="2000" data-sr-distance="20">
                                 <div style="display: none;" class="priceLoader">
                                     <div class="spinner-border priceLoader-circle" role="status" style="">
                                         <span class="sr-only">Loading...</span>
