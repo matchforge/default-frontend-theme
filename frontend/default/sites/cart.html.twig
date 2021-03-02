@@ -24,17 +24,20 @@
                             <table class="table mpl-table-shop mpl-table-responsive" data-sr="product" data-sr-interval="100" data-sr-duration="1000" data-sr-distance="20">
                                 <tbody>
                                 {% set cartItems = cart.items|length %}
+                                {% if cartItems == 0 %}
+                                    <h4>You have no items on your cart!</h4>
+                                {% endif %}
                                 {% for curKey,curItem in cart.items %}
                                     <tr class="mpl-table-product" data-sr-item="product" style="visibility: visible;">
                                         <td class="mpl-table-image">
-                                            <a href="shop-product.html" class="mpl-table-product-image">
+                                            <div class="mpl-table-product-image">
                                                     <span class="mpl-image">
                                                         <img src="{{ curItem.image }}" alt="">
                                                     </span>
-                                            </a>
+                                            </div>
                                         </td>
                                         <td class="mpl-table-name" data-title="Product">
-                                            <a style="font-size: 1rem; font-weight: bold;" href="shop-product.html" class="mpl-table-product-title h4">{{ curItem.name }}</a>
+                                            <span style="font-size: 1rem; font-weight: bold;" class="mpl-table-product-title h4">{{ curItem.name }}</span>
                                             <span style="font-size: 12px;" class="mpl-table-product-rating" data-title="Rating">
                                             {{ curItem.description }}
                                             </span>

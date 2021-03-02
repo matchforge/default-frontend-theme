@@ -4,25 +4,20 @@
 <div class="container mpl-fancybox-sign mpl-fancybox-content" id="popup-signin">
     <div class="mpl-fancybox-sign-content">
         <h2 class="h1">Sign In</h2>
-        <form action="#">
+        <div>
             <div class="row hgap-xs vgap-sm align-items-center">
                 <div class="col-12">
-                    <input class="form-control" type="text" id="signin_popup_login" name="signin_popup_login" placeholder="Login"><span class="form-control-bg"></span>
+                    <input class="form-control" type="text" id="signin_popup_login" name="signin_popup_login" placeholder="Email"><span class="form-control-bg"></span>
                 </div>
                 <div class="col-12">
                     <input class="form-control" type="password" id="signin_popup_password" name="signin_popup_password" placeholder="Password"><span class="form-control-bg"></span>
                 </div>
-                <div class="col">
-                    <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" type="checkbox" id="signin_popup_rememberme" name="signin_popup_rememberme"><label class="custom-control-label" for="signin_popup_rememberme">Remember Me</label>
-                    </div>
-                </div>
                 <div class="col-auto">
-                    <a href="#" class="small">Lost Password</a>
+                    <a href="/password-forget" class="small">Lost Password</a>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-md btn-block">Sign In</button>
-                </div>
+                    <button onclick="mobileLogin();" class="btn btn-md btn-block">Sign In</button>
+                </div><!--
                 <div class="col-12"> or </div>
                 <div class="col">
                     <a href="#" class="btn btn-md btn-block btn-facebook">
@@ -44,83 +39,8 @@
                             <path d="M23 12.2719C23 18.9047 18.433 23.625 11.6885 23.625C5.22213 23.625 0 18.4312 0 12C0 5.56875 5.22213 0.375 11.6885 0.375C14.8369 0.375 17.4857 1.52344 19.5264 3.41719L16.3451 6.45938C12.1834 2.46563 4.44447 5.46563 4.44447 12C4.44447 16.0547 7.70123 19.3406 11.6885 19.3406C16.3168 19.3406 18.0512 16.0406 18.3246 14.3297H11.6885V10.3312H22.8162C22.9246 10.9266 23 11.4984 23 12.2719Z" />
                         </svg>
                     </a>
-                </div>
-                <div class="col-12"> Are you new? <a href="sign-up.html">Sign Up</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    <button type="button" class="mpl-fancybox-close" data-fancybox-close>
-        <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6L6 18M6 6L18 18" />
-        </svg>
-    </button>
-</div>
-<!-- Popup Cart -->
-<div class="container mpl-fancybox-cart mpl-fancybox-content" id="popup-cart">
-    <div class="mpl-fancybox-cart-content">
-        <h2 class="h1 text-center">Cart</h2>
-        <div class="row justify-content-between vgap">
-            <div class="col-12">
-                <table class="table mpl-table-shop mpl-table-shop-sm mpl-table-responsive mb-0">
-                    <tbody>
-                    <tr class="mpl-table-product mpl-table-product-sm">
-                        <td class="mpl-table-image">
-                            <a href="shop-product.html" class="mpl-table-product-image">
-                                            <span class="mpl-image">
-                                                <img src="assets/images/dark/product-260x200.jpg" alt="">
-                                            </span>
-                            </a>
-                        </td>
-                        <td class="mpl-table-name" data-title="Product">
-                            <a href="shop-product.html" class="mpl-table-product-title h5">Gamepad MPL</a>
-                            <span class="mpl-price"> $120.00 </span>
-                        </td>
-                        <td class="mpl-table-remove">
-                            <a href="#" class="mpl-table-product-remove">
-                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="mpl-table-product mpl-table-product-sm">
-                        <td class="mpl-table-image">
-                            <a href="shop-product.html" class="mpl-table-product-image">
-                                            <span class="mpl-image">
-                                                <img src="assets/images/dark/product-2-260x200.jpg" alt="">
-                                            </span>
-                            </a>
-                        </td>
-                        <td class="mpl-table-name" data-title="Product">
-                            <a href="shop-product.html" class="mpl-table-product-title h5">Headphones MPL</a>
-                            <span class="mpl-price"> $84.99 </span>
-                        </td>
-                        <td class="mpl-table-remove">
-                            <a href="#" class="mpl-table-product-remove">
-                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-12">
-                <div class="d-flex justify-content-between h5 mb-0">
-                    <span>Subtotal:</span>
-                    <span>$70.00</span>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="row hgap-xs vgap-xs">
-                    <div class="col">
-                        <a href="cart.html" class="btn btn-block btn-default">View cart</a>
-                    </div>
-                    <div class="col">
-                        <a href="checkout.html" class="btn btn-block btn-default">Checkout</a>
-                    </div>
+                </div>-->
+                <div class="col-12"> Are you new? <a href="/sign-up">Sign Up</a>
                 </div>
             </div>
         </div>

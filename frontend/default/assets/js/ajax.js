@@ -14,11 +14,19 @@ function callAPI(type, route, data) {
             } else {
                 return response;
             }
+        },
+        error: function(response) {
+            if(response.responseJSON.errorMessage) {
+                displayError(response.responseJSON.errorMessage);
+                return {};
+            } else {
+                return response;
+            }
         }
     });
 }
 
 function displayError(errorMessage) {
     console.log('Error: ' + errorMessage);
-    alert('Error: ' + errorMessage);
+    toastr.error(errorMessage, 'Error!')
 }
