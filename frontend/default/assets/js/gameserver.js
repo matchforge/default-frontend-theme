@@ -45,7 +45,8 @@ if($("#gameserver-panel").length > 0) {
         } else {
             alert("Other render type not included to get selection value yet");
         }
-        var result = callAPI("GET", "/ajax/gameserver/pricing?game=" + gameType + "&selection=" + selectionValue, { });
+        var duration = $('#' + "payTime").val();
+        var result = callAPI("GET", "/ajax/gameserver/pricing?game=" + gameType + "&selection=" + selectionValue + "&payDays=" + duration, { });
         $('#price').text(result.responseJSON.price.toFixed(2) + "€");
         requiredCPU = result.responseJSON.requirements.cpu;
         requiredRAM = result.responseJSON.requirements.ram;
@@ -77,6 +78,10 @@ if($("#gameserver-panel").length > 0) {
     }
 
     $("#location").on('change', function() {
+        updatePrice();
+    });
+
+    $("#payTime").on('change', function() {
         updatePrice();
     });
 

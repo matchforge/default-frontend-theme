@@ -1,7 +1,7 @@
 {% extends "/frontend/default/base.html.twig" %}
 
 {% block content %}
-    {{ translateDictionary("index") }}
+    {{ setTranslateScope(Translation.Scope) }}
 
 
     <div class="content-wrap">
@@ -30,27 +30,14 @@
             <!-- Specials -->
             <div class="mpl-box-md bg-light">
                 <div class="container">
-                    <h2 class="text-center mb-60">From Our Store</h2>
-                    <!--
-Carousel
-
-Additional attributes:
-    data-autoplay
-    data-loop
-    data-dots
-    data-arrows
-    data-speed
-    data-slides
-    data-autoHeight
-    data-grabCursor
-    data-scrollbar
--->
-                    <div class="mpl-carousel" data-gap="10" data-loop="true" data-arrows="true" data-slides="1"
+                    <h2 class="text-center mb-60">{{ translate("ourGameservers") }}</h2>
+                    <div class="mpl-carousel" data-gap="10" data-loop="true" {% if images.length > 4 %} data-arrows="true" {% endif %} data-slides="1"
                          data-breakpoints="992:3,767:2">
-                        <a href="shop-product.html" class="mpl-product-item">
+                        {% for type,data in blueprints %}
+                        <a href="/gameserver/{{ data.url }}" class="mpl-product-item">
                                 <span class="mpl-product-image">
                                     <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-1280x820.jpg" alt="">
+                                        <img src="{{ data.images[random(data.images | keys)].url }}" alt="">
                                     </span>
                                     <span class="mpl-product-rating">
                                         <span class="mpl-rating">
@@ -102,385 +89,12 @@ Additional attributes:
                                     </span>
                                 </span>
                             <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Gamepad MPL</span>
-                                    <span class="mpl-price"> $120.00 </span>
-                                </span>
+                                        <span class="mpl-product-title h4">{{ data.name }} Game Server</span>
+                                        <div class="mpl-price" style="text-transform: none; font-weight: normal;">{{ translate("startingAt") }}</div>
+                                        <b><span class="mpl-price" style="font-weight: bold; font-size: 1.3em;">{{ data.pricingStartAt|number_format(2) }}€ / {{ data.selectionStartAt.min }} {{ data.selectionStartAt.name }}</span></b>
+                                    </span>
                         </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-2-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Headphones MPL</span>
-                                    <span class="mpl-price"> $84.99 <span>$114.99</span>
-                                    </span>
-                                    <span class="badge badge-brand">-30%</span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-3-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Headphones MPS</span>
-                                    <span class="mpl-price"> $74.99 </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-4-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Soundbar MPL</span>
-                                    <span class="mpl-price"> $109.99 </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-5-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 80%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Microphone MPL</span>
-                                    <span class="mpl-price"> $139.99 <span>149.99</span>
-                                    </span>
-                                    <span class="badge badge-brand">-10%</span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-7-1280x820.jpg" alt="">
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Gamepad MPL S</span>
-                                    <span class="mpl-product-date">
-                                        <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16 2V6M8 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z"/>
-                                        </svg>Beginning of 2021 </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-6-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Camera MPL</span>
-                                    <span class="mpl-price"> $198.99 </span>
-                                </span>
-                        </a>
-                        <a href="shop-product.html" class="mpl-product-item">
-                                <span class="mpl-product-image">
-                                    <span class="mpl-image">
-                                        <img src="/public/frontend/default/assets/images/dark/product-8-1280x820.jpg" alt="">
-                                    </span>
-                                    <span class="mpl-product-rating">
-                                        <span class="mpl-rating">
-                                            <span class="mpl-rating-front" style="width: 90%;">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                            <span class="mpl-rating-back">
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            <span class="mpl-product-content">
-                                    <span class="mpl-product-title h4">Camera MPS</span>
-                                    <span class="mpl-price"> $119.99 <span>$129.99</span>
-                                    </span>
-                                    <span class="badge badge-brand">-10%</span>
-                                </span>
-                        </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -534,7 +148,7 @@ Additional attributes:
                 <div class="container text-center">
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-8">
-                            <h2>Why Users Trust Us</h2>
+                            <h2>{{ translate("whyTrustUs") }}</h2>
                             <p>All and. Green day waters appear lights, fish you'll called likeness midst have you May.
                                 Lesser brought evening man she'd that. Replenish form wherein form midst. Good from
                                 forth together.</p>
@@ -581,5 +195,6 @@ Additional attributes:
             </div>
             <!-- /Features -->
 
+    {% include "/frontend/default/footerSocial.html.twig" %}
 
 {% endblock %}

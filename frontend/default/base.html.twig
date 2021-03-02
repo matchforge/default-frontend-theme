@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{% if Page.language|length %}{{Page.language}}{% endif %}">
+<html lang="{% if SEO.language|length %}{{SEO.language}}{% endif %}">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="assets/frontend/default/images/favicon.png">
     {% include "/frontend/default/head.html.twig" %}
 </head>
-{{ translateDictionary("base") }}
+{{ setTranslateScope(Translation.Scope) }}
 <body>
 {% include "/frontend/default/elements/preloader.html.twig" %}
 {% include "/frontend/default/elements/navbar.html.twig" %}

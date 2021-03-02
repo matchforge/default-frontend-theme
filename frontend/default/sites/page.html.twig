@@ -1,0 +1,8 @@
+{% extends "/frontend/default/base.html.twig" %}
+
+{% block content %}
+    {{ setTranslateScope(Translation.Scope) }}
+
+    {{ include(template_from_string(Page.content)) }}
+
+{% endblock %}

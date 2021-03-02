@@ -1,7 +1,7 @@
 {% extends "/frontend/default/base.html.twig" %}
 
 {% block content %}
-    {{ translateDictionary("cart") }}
+    {{ setTranslateScope(Translation.Scope) }}
 
 
     <div class="content-wrap">
@@ -10,7 +10,7 @@
             <section class="mpl-banner mpl-banner-top mpl-banner-parallax mpl-banner-small">
                 <div class="mpl-image" data-speed="0.8" style="z-index: 0;">
 
-                    <div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;" id="jarallax-container-0"><img src="assets/images/dark/bg-banner-1.jpg" alt="" class="jarallax-img" style="object-fit: cover; object-position: 50% 50%; max-width: none; position: absolute; top: 0px; left: 0px; width: 1902.8px; height: 502.52px; overflow: hidden; pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; margin-top: 16.24px; transform: translate3d(0px, -16.26px, 0px);"></div></div>
+                    <div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;" id="jarallax-container-0"><img src="/public/frontend/default/assets/images/dark/bg-banner-1.jpg" alt="" class="jarallax-img" style="object-fit: cover; object-position: 50% 50%; max-width: none; position: absolute; top: 0px; left: 0px; width: 1902.8px; height: 502.52px; overflow: hidden; pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; margin-top: 16.24px; transform: translate3d(0px, -16.26px, 0px);"></div></div>
                 <div class="mpl-banner-content mpl-box-md" style="filter: blur(0px);">
                     <div class="container">
                         <h1 class="display-1 mb-0">Cart</h1>
@@ -23,75 +23,63 @@
                         <div class="col-lg-7">
                             <table class="table mpl-table-shop mpl-table-responsive" data-sr="product" data-sr-interval="100" data-sr-duration="1000" data-sr-distance="20">
                                 <tbody>
-                                <tr class="mpl-table-product" data-sr-item="product" style="visibility: visible;">
-                                    <td class="mpl-table-image">
-                                        <a href="shop-product.html" class="mpl-table-product-image">
+                                {% set cartItems = cart.items|length %}
+                                {% for curKey,curItem in cart.items %}
+                                    <tr class="mpl-table-product" data-sr-item="product" style="visibility: visible;">
+                                        <td class="mpl-table-image">
+                                            <a href="shop-product.html" class="mpl-table-product-image">
                                                     <span class="mpl-image">
-                                                        <img src="assets/images/dark/product-260x200.jpg" alt="">
+                                                        <img src="{{ curItem.image }}" alt="">
                                                     </span>
-                                        </a>
-                                    </td>
-                                    <td class="mpl-table-name" data-title="Product">
-                                        <a href="shop-product.html" class="mpl-table-product-title h4">Gamepad MPL</a>
-                                        <span class="mpl-table-product-rating" data-title="Rating">
-                                                    <span class="mpl-rating">
-                                                        <span class="mpl-rating-front" style="width: 90%;">
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <span class="mpl-rating-back">
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </span>
+                                            </a>
+                                        </td>
+                                        <td class="mpl-table-name" data-title="Product">
+                                            <a style="font-size: 1rem; font-weight: bold;" href="shop-product.html" class="mpl-table-product-title h4">{{ curItem.name }}</a>
+                                            <span style="font-size: 12px;" class="mpl-table-product-rating" data-title="Rating">
+                                            {{ curItem.description }}
+                                            </span>
+                                        </td>
+                                        <td class="mpl-table-price" data-title="Price">
+                                            {% if curItem.data.paidHours|length > 0 %}
+                                                <span style="font-weight: bold;" class="mpl-price">
+                                                    {{ cartItemPrices[curKey] }}
+                                                </span><br>
+                                                <span class="mpl-price">
+                                                    {{ curItem.data.paidHours / 24 }} days
                                                 </span>
-                                    </td>
-                                    <td class="mpl-table-price" data-title="Price">
-                                        <span class="mpl-price"> $120.00 </span>
-                                    </td>
-                                    <td class="mpl-table-remove">
-                                        <a href="#" class="mpl-table-product-remove">
-                                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M18 6L6 18M6 6L18 18"></path>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
+                                            {% else %}
+                                                <span style="font-weight: bold;" class="mpl-price">
+                                                    {{ cartItemPrices[curKey] }}
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="mpl-table-remove">
+                                            <div style="cursor: pointer;" onclick="cartRemoveItem({{ curKey }});" class="mpl-table-product-remove">
+                                                <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M18 6L6 18M6 6L18 18"></path>
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                             <div class="row vgap mt-60">
-                                <div class="col-auto">
-                                    <input class="form-control" type="text" id="coupon_code" name="coupon_code" placeholder="Coupon code"><span class="form-control-bg"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="btn btn-default btn-md">Apply</a>
-                                </div>
+                                {% if coupon.code|length > 0 %}
+                                    <div class="col-auto">
+                                        <input class="form-control" type="text" id="coupon_code" value="{{ coupon.code }} ({{ couponDescription }})" name="coupon_code" placeholder="Coupon code" disabled><span class="form-control-bg"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div onclick="cartRemoveCoupon();" class="btn btn-default btn-md">Remove</div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-auto">
+                                        <input class="form-control" type="text" id="coupon_code" name="coupon_code" placeholder="Coupon code"><span class="form-control-bg"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div onclick="cartAddCoupon();" class="btn btn-default btn-md">Apply</div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-lg-5">
@@ -116,19 +104,36 @@
                                 </tr>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <td data-title="Subtotal">10.00€</td>
+                                    <td data-title="Subtotal">{{ toCurrencyFormat(cart.price["subtotal"]) }}</td>
                                 </tr>
+                                {% if cart.price["discount"] > 0 %}
+                                    <tr>
+                                        <th>Discount</th>
+                                        <td data-title="Subtotal">- {{ toCurrencyFormat(cart.price["discount"]) }}</td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
-                                    <th>VAT (0%)</th>
-                                    <td data-title="Subtotal">0.00€</td>
+                                    <th>VAT ({{ VATPercent }}%)</th>
+                                    <td data-title="Subtotal">{{ toCurrencyFormat(cart.price["vat"]) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td data-title="Total">10.00€</td>
+                                    <td data-title="Total">{{ toCurrencyFormat(cart.price["total"]) }}</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="checkout.html" class="btn btn-md btn-block">Proceed to Checkout</a>
+                            {% if cartItems > 0 %}
+                                {% if user.logged == true %}
+                                    <a href="/order/prepare" class="btn btn-md btn-block">Proceed to Checkout</a>
+                                {% else %}
+                                    <div class="text-center">
+                                        <b>You are not logged in, please:</b>
+                                    </div>
+                                    <br>
+                                    <a href="/login" class="btn btn-md btn-block">Login</a>
+                                    <a href="/sign-up" class="btn btn-md btn-block">Create an Account</a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

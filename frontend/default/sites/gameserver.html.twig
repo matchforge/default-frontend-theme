@@ -1,7 +1,7 @@
 {% extends "/frontend/default/base.html.twig" %}
 
 {% block content %}
-    {{ translateDictionary("gameserver") }}
+    {{ setTranslateScope(Translation.Scope) }}
 
 
     <div class="content-wrap" id="gameserver-panel" data-game-type="{{ blueprintIdentifier }}" data-selection="{{ blueprint.pricing.varMap }}" data-selection-type="{{ blueprint.pricing.type }}">
@@ -70,7 +70,7 @@ Additional attributes:
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
-                                <h3 style="margin-bottom: 0.3em; margin-top: 1em; padding-left: 10px;">What you get</h3>
+                                <h3 style="margin-bottom: 0.3em; margin-top: 1em; padding-left: 10px;">{{ translate("whatYouGet") }}</h3>
                                 <table class="table mpl-table-product-information mb-0">
                                     <tbody>
                                     <tr>
@@ -169,8 +169,7 @@ Additional attributes:
                                                 <div class="row hgap-sm vgap-sm align-items-center mt-30">
                                                     <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
                                                     <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                        <select name="{{ variable }}" id="{{ variable }}" class="form-control form-control-sm custom-select">
-                                                            <!--<option selected>Choose an option</option>-->
+                                                        <select data-variable="true" name="{{ variable }}" id="{{ variable }}" class="form-control form-control-sm custom-select">
                                                             {% for curStep in range(0, content.rules.max, blueprint.pricing.step) %}
                                                                 {% if curStep != 0 %}
                                                                     <option value="{{ curStep }}">{{ curStep }} {{ content.name }}</option>
@@ -188,7 +187,7 @@ Additional attributes:
                                                 <div class="row hgap-sm vgap-sm align-items-center mt-30">
                                                     <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
                                                     <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                        <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" min="{{ content.rules.min }}" max="{{ content.rules.max }}" required="">
+                                                        <input class="form-control" data-variable="true" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" min="{{ content.rules.min }}" max="{{ content.rules.max }}" required="">
                                                         <span class="form-control-bg"></span>
                                                     </div>
                                                 </div>
@@ -196,7 +195,7 @@ Additional attributes:
                                                 <div class="row hgap-sm vgap-sm align-items-center mt-30">
                                                     <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">{{ content.name }}</div>
                                                     <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
-                                                        <input class="form-control" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" required="">
+                                                        <input class="form-control" data-variable="true" type="text" id="{{ variable }}" name="{{ variable }}" placeholder="{{ content.description }}" required="">
                                                         <span class="form-control-bg"></span>
                                                     </div>
                                                 </div>
@@ -215,12 +214,29 @@ Additional attributes:
                                     </div>
                                 </div>
 
+                                <div class="row hgap-sm vgap-sm align-items-center mt-30">
+                                    <div class="col-{{ leftFieldSize }}" data-sr-item="product-main">Duration</div>
+                                    <div class="col-{{ rightFieldSize }}" data-sr-item="product-main">
+                                        <select name="payTime" id="payTime" class="form-control form-control-sm custom-select">
+                                            <option value="" disabled selected>Please choose a duration...</option>
+                                            {% for key,value in panel.gameserverPayDurations %}
+                                                {% if key == 30 %}
+                                                    <option value="{{ key }}" selected>{{ value }}</option>
+                                                {% else %}
+                                                    <option value="{{ key }}">{{ value }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <span class="form-control-bg"></span>
+                                    </div>
+                                </div>
+
                                 <div class="row hgap-sm vgap-sm align-items-center mt-40" style="justify-content: center;">
                                     <div class="col-auto" data-sr-item="product-main">
-                                        <h3 class="mt-30" id="price" data-sr-item="product-main">{{ pricingStartingAt|number_format(2) }}€</h3>
+                                        <h3 class="mt-30" id="price" data-sr-item="product-main">{{ pricingStartingAt|number_format(2) }} {{ CurrencyCode }}</h3>
                                     </div>
                                     <div class="col-auto" data-sr-item="product-main">
-                                        <button id="cartButton" class="btn btn-md btn-brand">Add to cart</button>
+                                        <button id="cartButton" onclick="cartAddGameserver();" class="btn btn-md btn-brand">{{ translate("addToCartBtn") }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +247,7 @@ Additional attributes:
             <!-- Related -->
             <div class="mpl-box-sm bg-light">
                 <div class="container">
-                    <h2>Frequently Asked Questions (FAQ)</h2>
+                    <h2>{{ translate("FAQ") }}</h2>
                     <div class="row vgap" data-sr="footer" data-sr-interval="120" data-sr-duration="1200" data-sr-distance="20">
                     <div id="accordion">
                         <div class="card">
